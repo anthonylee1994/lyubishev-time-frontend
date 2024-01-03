@@ -1,0 +1,21 @@
+{
+    "short_name": "柳比歇夫",
+    "name": "柳比歇夫",
+    "icons": [
+        {
+            "src": "logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "logo512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#F0F4F8",
+    "background_color": "#F0F4F8"
+}

@@ -1,0 +1,8 @@
+:root {
+    background-color: #f6f6f7;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
