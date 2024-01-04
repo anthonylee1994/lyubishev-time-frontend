@@ -12,7 +12,15 @@
         "heroku-postbuild": "npm run build"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@fontsource/inter": "^5.0.16",
+        "@fontsource/roboto": "^5.0.8",
+        "@mui/icons-material": "^5.15.3",
+        "@mui/material": "^5.15.3",
         "@vitejs/plugin-legacy": "^5.2.0",
+        "axios": "^1.6.4",
+        "formik": "^2.4.5",
         "localforage": "^1.10.0",
         "match-sorter": "^6.3.1",
         "react": "^18.2.0",
@@ -20,9 +28,11 @@
         "react-router-dom": "^6.21.1",
         "serve": "^14.2.1",
         "sort-by": "^1.2.0",
+        "telegram-login-button": "^0.1.0",
         "vite-plugin-commonjs": "^0.10.1",
         "vite-plugin-pwa": "^0.17.4",
-        "vite-tsconfig-paths": "^4.2.3"
+        "vite-tsconfig-paths": "^4.2.3",
+        "zustand": "^4.4.7"
     },
     "devDependencies": {
         "@types/react": "^18.2.43",
