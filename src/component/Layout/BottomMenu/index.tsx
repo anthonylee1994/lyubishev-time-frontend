@@ -12,7 +12,7 @@ export const BottomMenu = React.memo(() => {
 
     return (
         <BottomNavigation
-            sx={{position: "fixed", bottom: 0, width: "100%", zIndex: 1}}
+            sx={{position: "fixed", bottom: 0, width: "100%", zIndex: 1, pb: 2}}
             showLabels
             value={page}
             onChange={(_, newValue) => {

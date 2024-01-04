@@ -1,5 +1,5 @@
 import React from "react";
-import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {MenuItem, TextField} from "@mui/material";
 import {Field, useFormikContext} from "formik";
 import {useTagStore} from "../../../store/useTagStore.ts";
 
@@ -17,7 +17,7 @@ export const FormContent = React.memo(() => {
                         variant="standard"
                         label="標籤名稱"
                         inputProps={{maxLength: 20}}
-                        error={Boolean(meta.touched && meta.error)}
+                        error={meta.touched && meta.error}
                         helperText={meta.touched && meta.error}
                         disabled={formik.isSubmitting}
                         {...field}
@@ -27,37 +27,32 @@ export const FormContent = React.memo(() => {
 
             <Field name="color_id">
                 {({field, meta}) => (
-                    <FormControl
-                        sx={{mt: 2}}
+                    <TextField
+                        sx={{ mt: 2, bgcolor: colors.find(color => color.id === field.value)?.hexcode }}
+                        select
                         fullWidth
-                        variant="standard"
-                        error={Boolean(meta.touched && meta.error)}
+                        label="顏色"
+                        variant="filled"
+                        disabled={formik.isSubmitting}
+                        helperText={meta.touched && meta.error}
+                        error={meta.touched && meta.error}
+                        {...field}
                     >
-                        <InputLabel>顏色</InputLabel>
-                        <Select
-                            label="顏色"
-                            error={Boolean(meta.touched && meta.error)}
-                            {...field}
-                        >
-                            {colors.map(color => (
-                                <MenuItem
-                                    key={color.id}
-                                    value={color.id}
-                                    sx={{
-                                        bgcolor: color.hexcode,
-                                        color: "white",
-                                        "&:hover, &.Mui-selected": {
-                                            bgcolor: `${color.hexcode} !important`,
-                                            color: "white",
-                                        },
-                                    }}
-                                >
-                                    {color.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        {meta.touched && meta.error && <FormHelperText>必須填寫</FormHelperText>}
-                    </FormControl>
+                        {colors.map(color => (
+                            <MenuItem
+                                key={color.id}
+                                value={color.id}
+                                sx={{
+                                    bgcolor: color.hexcode,
+                                    "&:hover, &.focus, &.Mui-selected": {
+                                        bgcolor: `${color.hexcode} !important`,
+                                    },
+                                }}
+                            >
+                                {color.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 )}
             </Field>
         </form>
