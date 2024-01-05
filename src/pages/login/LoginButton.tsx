@@ -14,7 +14,7 @@ const mockUser = {
 };
 
 export const LoginButton = React.memo(() => {
-    const [showLoading, setShowLoading] = React.useState(true);
+    const [showLoading, setShowLoading] = React.useState(false);
     const isLoggedIn = useAuthStore(state => state.isLoggedIn);
     const login = useAuthStore(state => state.login);
 
