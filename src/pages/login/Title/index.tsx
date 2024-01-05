@@ -4,7 +4,7 @@ import {Box, Typography} from "@mui/material";
 
 export const Title = React.memo(() => {
     return (
-        <Box textAlign="center" width={{xs: 300, md: 400}}>
+        <Box mt={{ xs: 20, md: 25 }} textAlign="center" width={{xs: 300, md: 400}}>
             <img src={TitleImage} style={{width: "100%"}} alt="title" />
             <Typography
                 sx={{fontSize: {xs: "2.5rem", md: "2rem"}, fontWeight: "bold", mt: {xs: 1, md: 2}}}

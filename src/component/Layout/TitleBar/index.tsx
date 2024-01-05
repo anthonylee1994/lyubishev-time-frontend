@@ -2,7 +2,6 @@ import React from "react";
 import {AppBar, Box, Toolbar, Typography} from "@mui/material";
 import {blueGrey, grey} from "@mui/material/colors";
 import {LogoutButton} from "./LogoutButton.tsx";
-import {AddButton} from "./AddButton.tsx";
 
 export const TitleBar = React.memo(() => {
     return (
@@ -16,10 +15,14 @@ export const TitleBar = React.memo(() => {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <AddButton />
-                    <Typography variant="h6" component="div" sx={{color: grey[900]}}>
+                    <Box display="flex" alignItems="center">
+                    <Typography variant="h6" component="div" sx={{ fontSize: { xs: 20, sm: 26}, color: grey[900], fontWeight: 'bold', mr: 1}}>
                         柳比歇夫
                     </Typography>
+                        <Typography component="div" sx={{fontSize: {xs: 16, sm: 18}, color: grey[700]}}>
+                            時間管理大師
+                        </Typography>
+                    </Box>
                     <LogoutButton />
                 </Box>
             </Toolbar>

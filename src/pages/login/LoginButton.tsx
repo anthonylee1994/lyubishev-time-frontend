@@ -14,7 +14,7 @@ const mockUser = {
 };
 
 export const LoginButton = React.memo(() => {
-    const [showLoading, setShowLoading] = React.useState(false);
+    const [showLoading, setShowLoading] = React.useState(true);
     const isLoggedIn = useAuthStore(state => state.isLoggedIn);
     const login = useAuthStore(state => state.login);
 
@@ -34,7 +34,7 @@ export const LoginButton = React.memo(() => {
                 onLogin(mockUser);
             }, 3000);
         }
-    }, []);
+    }, [onLogin]);
 
     return (
         <Box position="fixed" bottom={{xs: "10%", md: "15%"}}>

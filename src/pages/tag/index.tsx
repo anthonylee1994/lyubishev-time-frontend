@@ -5,6 +5,7 @@ import {Page} from "../../component/Page.tsx";
 import {useTagStore} from "../../store/useTagStore.ts";
 import {Loading} from "../../component/Loading.tsx";
 import {EditTagDialog} from "./EditTagDialog";
+import {AddButton} from "../../component/AddButton.tsx";
 
 export const TagsPage = React.memo(() => {
     const isFetching = useTagStore(state => state.isFetching);
@@ -12,6 +13,7 @@ export const TagsPage = React.memo(() => {
 
     const fetchColors = useTagStore(state => state.fetchColors);
     const fetchTags = useTagStore(state => state.fetchTags);
+    const setEditModal = useTagStore(state => state.setEditModal);
 
     React.useEffect(() => {
         Promise.all([fetchColors(), fetchTags()]);
@@ -25,6 +27,8 @@ export const TagsPage = React.memo(() => {
             ))}
             <DeleteTagDialog />
             <EditTagDialog />
+
+            <AddButton onClick={() => setEditModal("new")} />
         </Page>
     );
 });

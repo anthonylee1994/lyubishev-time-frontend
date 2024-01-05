@@ -5,6 +5,7 @@ import {useTagStore} from "../../../store/useTagStore.ts";
 import {TimeEventTag} from "../../../type/tag.ts";
 import {UpButton} from "./UpButton.tsx";
 import {DownButton} from "./DownButton.tsx";
+import {grey} from "@mui/material/colors";
 
 interface Props {
     tag: TimeEventTag;
@@ -16,15 +17,16 @@ export const TagCard = React.memo<Props>(({tag}) => {
 
     return (
         <Box
+            boxShadow={2}
             flexDirection="column"
             justifyContent="space-between"
             alignItems="center"
             display="flex"
-            m={1}
+            m={{xs: 1, sm: 2}}
             borderRadius={4}
             bgcolor={tag.color.hexcode}
         >
-            <Typography p={1}>{tag.name}</Typography>
+            <Typography color={grey[800]} p={1}>{tag.name}</Typography>
             <Box
                 display="flex"
                 justifyContent="space-between"
