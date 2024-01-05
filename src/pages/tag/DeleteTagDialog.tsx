@@ -1,13 +1,5 @@
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material";
 import React from "react";
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Typography,
-} from "@mui/material";
 import {useTagStore} from "../../store/useTagStore.ts";
 
 export const DeleteTagDialog = React.memo(() => {

@@ -2,45 +2,49 @@ import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/ma
 import {Formik} from "formik";
 import React from "react";
 import * as Yup from "yup";
-import {useTagStore} from "../../../store/useTagStore.ts";
+import {useEventStore} from "../../../store/useEventStore.ts";
 import {FormContent} from "./FormContent.tsx";
 
 interface FormValues {
     name: string;
-    color_id?: number;
+    tag_id?: number;
+    minute: number;
     order: number;
 }
 
 const EditSchema = Yup.object().shape({
     name: Yup.string().required("必須填寫"),
-    color_id: Yup.number().required("必須填寫"),
+    tag_id: Yup.number().required("必須填寫"),
+    minute: Yup.number().required("必須填寫"),
 });
 
-export const EditTagDialog = React.memo(() => {
-    const editModal = useTagStore(state => state.editModal);
-    const tagsLength = useTagStore(state => state.tags.length);
+export const EditEventDialog = React.memo(() => {
+    const editModal = useEventStore(state => state.editModal);
+    const eventsLength = useEventStore(state => state.tags.length);
     const actionName = editModal === "new" ? "新增" : editModal !== false ? "修改" : "";
-    const colors = useTagStore(state => state.colors);
+    const tags = useEventStore(state => state.tags);
 
-    const setEditModal = useTagStore(state => state.setEditModal);
-    const createTag = useTagStore(state => state.createTag);
-    const editTag = useTagStore(state => state.editTag);
-    const fetchTags = useTagStore(state => state.fetchTags);
+    const setEditModal = useEventStore(state => state.setEditModal);
+    const createEvent = useEventStore(state => state.createEvent);
+    const editEvent = useEventStore(state => state.editEvent);
+    const fetchEvents = useEventStore(state => state.fetchEvents);
 
     const initialValues = React.useMemo<FormValues>(
         () =>
             editModal === "new" || !editModal
                 ? {
                       name: "",
-                      color_id: colors[0]?.id,
-                      order: tagsLength,
+                      tag_id: tags[0]?.id,
+                      minute: 5,
+                      order: eventsLength,
                   }
                 : {
                       name: editModal.name,
-                      color_id: editModal.color_id,
+                      tag_id: editModal.tag_id,
+                      minute: editModal.minute,
                       order: editModal.order,
                   },
-        [editModal, tagsLength]
+        [editModal, eventsLength]
     );
 
     const onClose = () => {
@@ -53,21 +57,21 @@ export const EditTagDialog = React.memo(() => {
         }
 
         if (editModal === "new") {
-            await createTag(values);
+            await createEvent(values);
         } else {
-            await editTag({
+            await editEvent({
                 id: editModal.id,
                 ...values,
             });
         }
         formikHelpers.setSubmitting(false);
         setEditModal(false);
-        await fetchTags();
+        await fetchEvents();
     };
 
     return (
         <Dialog fullWidth maxWidth="xs" open={editModal !== false} onClose={onClose}>
-            <DialogTitle>{actionName}活動標籤</DialogTitle>
+            <DialogTitle>{actionName}活動</DialogTitle>
             <DialogContent>
                 <Formik validationSchema={EditSchema} initialValues={initialValues} onSubmit={onSubmit}>
                     <FormContent />
@@ -75,7 +79,7 @@ export const EditTagDialog = React.memo(() => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>取消</Button>
-                <Button form="edit-tag-form" type="submit" variant="contained">
+                <Button form="edit-event-form" type="submit" variant="contained">
                     {actionName}
                 </Button>
             </DialogActions>

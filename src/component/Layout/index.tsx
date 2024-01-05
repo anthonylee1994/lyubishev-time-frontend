@@ -1,8 +1,8 @@
 import React from "react";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {TitleBar} from "./TitleBar";
-import {BottomMenu} from "./BottomMenu";
 import {useAuthStore} from "../../store/useAuthStore.ts";
+import {BottomMenu} from "./BottomMenu";
+import {TitleBar} from "./TitleBar";
 
 export const Layout = React.memo(() => {
     const location = useLocation();

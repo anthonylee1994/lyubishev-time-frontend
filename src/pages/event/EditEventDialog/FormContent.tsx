@@ -1,21 +1,22 @@
 import {MenuItem, TextField} from "@mui/material";
 import {Field, useFormikContext} from "formik";
 import React from "react";
-import {useTagStore} from "../../../store/useTagStore.ts";
+import {useEventStore} from "../../../store/useEventStore.ts";
+import {TimeUtil} from "../../../util/TimeUtil.ts";
 
 export const FormContent = React.memo(() => {
     const formik = useFormikContext();
-    const colors = useTagStore(state => state.colors);
+    const tags = useEventStore(state => state.tags);
 
     return (
-        <form onSubmit={formik.handleSubmit} id="edit-tag-form">
+        <form onSubmit={formik.handleSubmit} id="edit-event-form">
             <Field name="name">
                 {({field, meta}) => (
                     <TextField
                         autoFocus
                         fullWidth
                         variant="standard"
-                        label="標籤名稱"
+                        label="活動名稱"
                         inputProps={{maxLength: 20}}
                         error={meta.touched && meta.error}
                         helperText={meta.touched && meta.error}
@@ -25,36 +26,59 @@ export const FormContent = React.memo(() => {
                 )}
             </Field>
 
-            <Field name="color_id">
+            <Field name="tag_id">
                 {({field, meta}) => (
                     <TextField
                         sx={{
                             mt: 2,
-                            bgcolor: colors.find(color => color.id === field.value)?.hexcode,
+                            bgcolor: tags.find(tag => tag.id === field.value)?.color.hexcode,
                             borderTopLeftRadius: 4,
                             borderTopRightRadius: 4,
                         }}
                         select
                         fullWidth
-                        label="顏色"
+                        label="活動標籤"
                         variant="filled"
                         disabled={formik.isSubmitting}
                         helperText={meta.touched && meta.error}
                         error={meta.touched && meta.error}
                         {...field}>
-                        {colors.map(color => (
+                        {tags.map(tag => (
                             <MenuItem
-                                key={color.id}
-                                value={color.id}
+                                key={tag.id}
+                                value={tag.id}
                                 sx={{
-                                    bgcolor: color.hexcode,
+                                    bgcolor: tag.color.hexcode,
                                     "&:hover, &.focus, &.Mui-selected": {
-                                        bgcolor: `${color.hexcode} !important`,
+                                        bgcolor: `${tag.color.hexcode} !important`,
                                     },
                                 }}>
-                                {color.name}
+                                {tag.name}
                             </MenuItem>
                         ))}
+                    </TextField>
+                )}
+            </Field>
+            <Field name="minute">
+                {({field, meta}) => (
+                    <TextField
+                        sx={{mt: 2}}
+                        select
+                        fullWidth
+                        label="佔用時間"
+                        variant="filled"
+                        disabled={formik.isSubmitting}
+                        helperText={meta.touched && meta.error}
+                        error={meta.touched && meta.error}
+                        {...field}>
+                        {TimeUtil.timeList.map(
+                            time =>
+                                time !== 0 && (
+                                    <MenuItem key={time} value={time}>
+                                        {TimeUtil.timeString(time)}
+                                    </MenuItem>
+                                )
+                        )}
                     </TextField>
                 )}
             </Field>

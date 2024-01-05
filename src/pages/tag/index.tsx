@@ -1,14 +1,15 @@
+import LocalOfferIconIcon from "@mui/icons-material/LocalOffer";
 import React from "react";
-import {DeleteTagDialog} from "./DeleteTagDialog.tsx";
-import {Page} from "../../component/Page.tsx";
-import {useTagStore} from "../../store/useTagStore.ts";
-import {Loading} from "../../component/Loading.tsx";
-import {EditTagDialog} from "./EditTagDialog";
 import {AddButton} from "../../component/AddButton.tsx";
 import {EmptyPlaceHolder} from "../../component/EmptyPlaceHolder.tsx";
-import {DraggableList} from "../../component/dnd/DraggableList.tsx";
-import {TagCard} from "./TagCard.tsx";
+import {Loading} from "../../component/Loading.tsx";
+import {Page} from "../../component/Page.tsx";
 import {DragProvider} from "../../component/dnd/DragProvider.tsx";
+import {DraggableList} from "../../component/dnd/DraggableList.tsx";
+import {useTagStore} from "../../store/useTagStore.ts";
+import {DeleteTagDialog} from "./DeleteTagDialog.tsx";
+import {EditTagDialog} from "./EditTagDialog";
+import {TagCard} from "./TagCard.tsx";
 
 export const TagsPage = React.memo(() => {
     const isFetching = useTagStore(state => state.isFetching);
@@ -26,7 +27,7 @@ export const TagsPage = React.memo(() => {
         <Page>
             <Loading show={isFetching} />
             {!isFetching && tags.length === 0 ? (
-                <EmptyPlaceHolder modelName="活動標籤" />
+                <EmptyPlaceHolder Icon={LocalOfferIconIcon} modelName="活動標籤" />
             ) : (
                 <DragProvider>
                     <DraggableList

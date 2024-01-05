@@ -1,7 +1,7 @@
-import {create} from "zustand";
-import {TimeEventTag} from "../type/tag.tsx";
 import axios from "axios";
+import {create} from "zustand";
 import {Color} from "../type/color.ts";
+import {TimeEventTag} from "../type/tag.tsx";
 
 interface TagStore {
     isFetching: boolean;

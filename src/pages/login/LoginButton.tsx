@@ -1,8 +1,8 @@
-import React from "react";
-import TelegramLoginButton, {TelegramUser} from "telegram-login-button";
 import {Box, CircularProgress} from "@mui/material";
-import {useAuthStore} from "../../store/useAuthStore.ts";
+import React from "react";
 import {useNavigate} from "react-router-dom";
+import TelegramLoginButton, {TelegramUser} from "telegram-login-button";
+import {useAuthStore} from "../../store/useAuthStore.ts";
 
 const mockUser = {
     id: 234392020,
@@ -38,11 +38,7 @@ export const LoginButton = React.memo(() => {
 
     return (
         <Box position="fixed" bottom={{xs: "10%", md: "15%"}}>
-            {showLoading ? (
-                <CircularProgress size={50} thickness={6} />
-            ) : (
-                <TelegramLoginButton botName="LyubishevBot" dataOnauth={onLogin} />
-            )}
+            {showLoading ? <CircularProgress size={50} thickness={6} /> : <TelegramLoginButton botName="LyubishevBot" dataOnauth={onLogin} />}
         </Box>
     );
 });

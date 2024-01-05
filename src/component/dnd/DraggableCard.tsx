@@ -1,6 +1,6 @@
+import {Identifier, XYCoord} from "dnd-core";
 import React from "react";
 import {useDrag, useDrop} from "react-dnd";
-import {Identifier, XYCoord} from "dnd-core";
 
 interface Props {
     id: number;

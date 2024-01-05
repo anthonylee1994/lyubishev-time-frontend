@@ -1,8 +1,8 @@
-import React from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
-import {MenuButton} from "./MenuButton.tsx";
-import {useAuthStore} from "../../../store/useAuthStore.ts";
+import React from "react";
 import {useNavigate} from "react-router-dom";
+import {useAuthStore} from "../../../store/useAuthStore.ts";
+import {MenuButton} from "./MenuButton.tsx";
 
 export const LogoutButton = React.memo(() => {
     const logout = useAuthStore(state => state.logout);
