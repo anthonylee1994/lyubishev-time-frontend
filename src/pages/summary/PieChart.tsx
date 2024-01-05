@@ -1,6 +1,7 @@
 import React from "react";
 import {Pie} from "react-chartjs-2";
 import {useSummaryStore} from "../../store/useSummaryStore.ts";
+import {TimeUtil} from "../../util/TimeUtil.ts";
 
 export const PieChart = React.memo(() => {
     const tags = useSummaryStore(state => state.tags);
@@ -20,6 +21,17 @@ export const PieChart = React.memo(() => {
                         backgroundColor: summaryTags.map(tag => tag?.color.hexcode),
                     },
                 ],
+            }}
+            options={{
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: tooltipItem => {
+                                return TimeUtil.timeString(tooltipItem.parsed);
+                            },
+                        },
+                    },
+                },
             }}
         />
     );
