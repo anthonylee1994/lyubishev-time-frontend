@@ -25,7 +25,7 @@ export const TagCard = React.memo<Props>(({item}) => {
             bgcolor={item.color.hexcode}
             sx={{}}
         >
-            <Typography color={grey[800]} p={1}>
+            <Typography color={grey[800]} p={1} sx={{userSelect: "none"}}>
                 {item.name}
             </Typography>
             <Box
