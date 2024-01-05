@@ -13,6 +13,7 @@ interface TagStore {
     createTag: (tag: Partial<TimeEventTag>) => Promise<void>;
     editTag: (tag: Partial<TimeEventTag>) => Promise<void>;
     deleteTag: (tagId: number) => Promise<void>;
+
     reorderTags: (ids: number[]) => Promise<void>;
 
     editModal: false | "new" | TimeEventTag;
@@ -25,7 +26,7 @@ interface TagStore {
 export const useTagStore = create<TagStore>((set, get) => ({
     isFetching: false,
     tags: [],
-    colors:[],
+    colors: [],
     editModal: false,
     deleteModal: false,
     setEditModal: (editModal: false | "new" | TimeEventTag) => set({editModal}),
@@ -40,17 +41,17 @@ export const useTagStore = create<TagStore>((set, get) => ({
         const response = await axios.get("/colors");
         set({colors: response.data, isFetching: false});
     },
-    createTag: async (tag) => {
+    createTag: async tag => {
         set({isFetching: true});
         await axios.post("/time_event_tags", tag);
         set({isFetching: false});
     },
-    editTag: async (tag) => {
+    editTag: async tag => {
         set({isFetching: true});
         await axios.put(`/time_event_tags/${tag.id}`, tag);
         set({isFetching: false});
     },
-    deleteTag: async (tagId) => {
+    deleteTag: async tagId => {
         set({isFetching: true});
         await axios.delete(`/time_event_tags/${tagId}`);
         set({isFetching: false});
@@ -60,5 +61,5 @@ export const useTagStore = create<TagStore>((set, get) => ({
         await axios.put("/time_event_tags/reorder", {ids});
         set({isFetching: false});
         await get().fetchTags();
-    }
+    },
 }));
