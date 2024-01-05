@@ -1,11 +1,10 @@
-import {MenuItem, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import {Field, useFormikContext} from "formik";
 import React from "react";
-import {useTagStore} from "../../../store/useTagStore.ts";
+import {ColorPicker} from "./ColorPicker.tsx";
 
 export const FormContent = React.memo(() => {
     const formik = useFormikContext();
-    const colors = useTagStore(state => state.colors);
 
     return (
         <form onSubmit={formik.handleSubmit} id="edit-tag-form">
@@ -24,40 +23,7 @@ export const FormContent = React.memo(() => {
                     />
                 )}
             </Field>
-
-            <Field name="color_id">
-                {({field, meta}) => (
-                    <TextField
-                        sx={{
-                            mt: 2,
-                            bgcolor: colors.find(color => color.id === field.value)?.hexcode,
-                            borderTopLeftRadius: 4,
-                            borderTopRightRadius: 4,
-                        }}
-                        select
-                        fullWidth
-                        label="顏色"
-                        variant="filled"
-                        disabled={formik.isSubmitting}
-                        helperText={meta.touched && meta.error}
-                        error={meta.touched && meta.error}
-                        {...field}>
-                        {colors.map(color => (
-                            <MenuItem
-                                key={color.id}
-                                value={color.id}
-                                sx={{
-                                    bgcolor: color.hexcode,
-                                    "&:hover, &.focus, &.Mui-selected": {
-                                        bgcolor: `${color.hexcode} !important`,
-                                    },
-                                }}>
-                                {color.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                )}
-            </Field>
+            <ColorPicker />
         </form>
     );
 });
