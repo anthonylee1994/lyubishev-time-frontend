@@ -1,8 +1,8 @@
-import axios from "axios";
 import {create} from "zustand";
 import {TimeEvent} from "../type/event.ts";
 import {TimeEventTag} from "../type/tag.ts";
 import dayjs from "dayjs";
+import {apiClient} from "../util/apiClient.ts";
 
 interface EventStore {
     isFetching: boolean;
@@ -42,17 +42,17 @@ export const useEventStore = create<EventStore>((set, get) => ({
     setDeleteModal: (deleteModal: false | number) => set({deleteModal}),
     fetchEvents: async () => {
         set({isFetching: true});
-        const response = await axios.get("/time_events", {params: {date: get().date}});
+        const response = await apiClient.get("/time_events", {params: {date: get().date}});
         set({events: response.data, isFetching: false});
     },
     fetchTags: async () => {
         set({isFetching: true});
-        const response = await axios.get("/time_event_tags");
+        const response = await apiClient.get("/time_event_tags");
         set({tags: response.data, isFetching: false});
     },
     createEvent: async event => {
         set({isFetching: true});
-        await axios.post("/time_events", {
+        await apiClient.post("/time_events", {
             ...event,
             date: get().date,
         });
@@ -60,17 +60,17 @@ export const useEventStore = create<EventStore>((set, get) => ({
     },
     editEvent: async event => {
         set({isFetching: true});
-        await axios.put(`/time_events/${event.id}`, event);
+        await apiClient.put(`/time_events/${event.id}`, event);
         set({isFetching: false});
     },
     deleteEvent: async eventId => {
         set({isFetching: true});
-        await axios.delete(`/time_events/${eventId}`);
+        await apiClient.delete(`/time_events/${eventId}`);
         set({isFetching: false});
     },
     reorderEvents: async (ids: number[]) => {
         set({isFetching: true});
-        await axios.put("/time_events/reorder", {ids});
+        await apiClient.put("/time_events/reorder", {ids});
         set({isFetching: false});
         await get().fetchEvents();
     },

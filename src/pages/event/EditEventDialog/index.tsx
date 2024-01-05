@@ -13,7 +13,7 @@ interface FormValues {
 }
 
 const EditSchema = Yup.object().shape({
-    name: Yup.string().required("必須填寫"),
+    name: Yup.string().trim().required("必須填寫"),
     tag_id: Yup.number().required("必須填寫"),
     minute: Yup.number().required("必須填寫"),
 });
@@ -44,7 +44,7 @@ export const EditEventDialog = React.memo(() => {
                       minute: editModal.minute,
                       order: editModal.order,
                   },
-        [editModal, eventsLength]
+        [editModal, eventsLength, tags]
     );
 
     const onClose = () => {
@@ -73,7 +73,11 @@ export const EditEventDialog = React.memo(() => {
         <Dialog fullWidth maxWidth="xs" open={editModal !== false} onClose={onClose}>
             <DialogTitle>{actionName}活動</DialogTitle>
             <DialogContent>
-                <Formik validationSchema={EditSchema} initialValues={initialValues} onSubmit={onSubmit}>
+                <Formik
+                    validationSchema={EditSchema}
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                >
                     <FormContent />
                 </Formik>
             </DialogContent>

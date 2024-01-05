@@ -7,7 +7,7 @@ import {Page} from "../../component/Page.tsx";
 import {DragProvider} from "../../component/dnd/DragProvider.tsx";
 import {DraggableList} from "../../component/dnd/DraggableList.tsx";
 import {useEventStore} from "../../store/useEventStore.ts";
-import {DateSelect} from "./DateSelect.tsx";
+import {DateSelect} from "../../component/DateSelect.tsx";
 import {DeleteEventDialog} from "./DeleteEventDialog.tsx";
 import {EditEventDialog} from "./EditEventDialog";
 import {EventCard} from "./EventCard.tsx";
@@ -21,14 +21,17 @@ export const EventPage = React.memo(() => {
 
     const setEditModal = useEventStore(state => state.setEditModal);
 
+    const date = useEventStore(state => state.date);
+    const setDate = useEventStore(state => state.setDate);
+
     React.useEffect(() => {
         Promise.all([fetchEvents(), fetchTags()]);
     }, [fetchEvents, fetchTags]);
 
     return (
         <Page>
-            <DateSelect />
             <Loading show={isFetching} />
+            <DateSelect date={date} setDate={setDate} />
 
             {!isFetching && events.length === 0 ? (
                 <EmptyPlaceHolder Icon={RestoreIcon} modelName="活動記錄" />

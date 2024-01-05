@@ -20,7 +20,17 @@ export const EventCard = React.memo<Props>(({item}) => {
     const setDeleteModal = useEventStore(state => state.setDeleteModal);
 
     return (
-        <Box boxShadow={2} flexDirection="column" justifyContent="space-between" alignItems="center" display="flex" m={2} borderRadius={4} bgcolor="white" position="relative">
+        <Box
+            boxShadow={2}
+            flexDirection="column"
+            justifyContent="space-between"
+            alignItems="center"
+            display="flex"
+            m={2}
+            borderRadius={4}
+            bgcolor="white"
+            position="relative"
+        >
             <Box
                 sx={{
                     width: "100%",
@@ -28,7 +38,8 @@ export const EventCard = React.memo<Props>(({item}) => {
                     borderTopLeftRadius: 16,
                     borderTopRightRadius: 16,
                     textAlign: "center",
-                }}>
+                }}
+            >
                 <Typography color={grey[800]} p={1} sx={{userSelect: "none"}}>
                     {item.tag.name}
                 </Typography>
@@ -36,13 +47,22 @@ export const EventCard = React.memo<Props>(({item}) => {
             <Box p={2} sx={{wordBreak: "break-all"}}>
                 {item.name}
             </Box>
-            <Box display="flex" justifyContent="space-between" alignItems="center" bgcolor="grey.100" width="100%" sx={{borderBottomLeftRadius: 12, borderBottomRightRadius: 12}}>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                bgcolor="grey.100"
+                width="100%"
+                sx={{borderBottomLeftRadius: 12, borderBottomRightRadius: 12}}
+            >
                 <Box>
                     <UpButton id={item.id} items={events} reorder={reorderEvents} />
                     <DownButton id={item.id} items={events} reorder={reorderEvents} />
                 </Box>
 
-                <Box color="grey.800">{TimeUtil.timeString(item.minute)}</Box>
+                <Box sx={{color: grey[800], fontWeight: "bold"}}>
+                    已用{TimeUtil.timeString(item.minute)}
+                </Box>
 
                 <Box>
                     <IconButton aria-label="edit" onClick={() => setEditModal(item)}>

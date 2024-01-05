@@ -12,7 +12,7 @@ interface FormValues {
 }
 
 const EditSchema = Yup.object().shape({
-    name: Yup.string().required("必須填寫"),
+    name: Yup.string().trim().required("必須填寫"),
     color_id: Yup.number().required("必須填寫"),
 });
 
@@ -40,7 +40,7 @@ export const EditTagDialog = React.memo(() => {
                       color_id: editModal.color_id,
                       order: editModal.order,
                   },
-        [editModal, tagsLength]
+        [colors, editModal, tagsLength]
     );
 
     const onClose = () => {
@@ -69,7 +69,11 @@ export const EditTagDialog = React.memo(() => {
         <Dialog fullWidth maxWidth="xs" open={editModal !== false} onClose={onClose}>
             <DialogTitle>{actionName}活動標籤</DialogTitle>
             <DialogContent>
-                <Formik validationSchema={EditSchema} initialValues={initialValues} onSubmit={onSubmit}>
+                <Formik
+                    validationSchema={EditSchema}
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                >
                     <FormContent />
                 </Formik>
             </DialogContent>

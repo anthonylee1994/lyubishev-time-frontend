@@ -16,10 +16,18 @@ export const AddButton = React.memo<Props>(({onClick}) => {
                 bottom: "15%",
                 left: "50%",
                 transform: "translateX(-50%)",
-            }}>
+            }}
+        >
             <Zoom in>
-                <Fab onClick={onClick} color="primary" aria-label="add">
-                    <AddIcon />
+                <Fab
+                    variant="extended"
+                    onClick={onClick}
+                    color="secondary"
+                    aria-label="add"
+                    sx={{fontSize: {xs: 16, sm: 20}, width: {xs: 120, sm: 120}}}
+                >
+                    <AddIcon sx={{mr: 1}} />
+                    新增
                 </Fab>
             </Zoom>
         </Box>

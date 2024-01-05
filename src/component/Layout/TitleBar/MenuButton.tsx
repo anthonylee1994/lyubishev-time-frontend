@@ -1,5 +1,4 @@
 import {Box} from "@mui/material";
-import {purple} from "@mui/material/colors";
 import React from "react";
 
 interface Props {
@@ -20,13 +19,15 @@ export const MenuButton = React.memo<Props>(({icon, onClick}) => {
                 justifyContent: "center",
                 alignItems: "center",
                 transition: "all 100ms",
-                backgroundColor: purple[200],
+                backgroundColor: "secondary.main",
+                color: "rgba(0, 0, 0, 0.87)",
                 boxShadow: 2,
                 "&:active": {
                     boxShadow: 4,
                     transform: "scale(1.1)",
                 },
-            }}>
+            }}
+        >
             {icon}
         </Box>
     );

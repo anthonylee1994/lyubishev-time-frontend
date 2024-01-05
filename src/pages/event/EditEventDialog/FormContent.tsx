@@ -13,11 +13,12 @@ export const FormContent = React.memo(() => {
             <Field name="name">
                 {({field, meta}) => (
                     <TextField
+                        multiline
                         autoFocus
                         fullWidth
                         variant="standard"
-                        label="活動名稱"
-                        inputProps={{maxLength: 20}}
+                        label="活動名稱 / 簡介"
+                        inputProps={{maxLength: 1000}}
                         error={meta.touched && meta.error}
                         helperText={meta.touched && meta.error}
                         disabled={formik.isSubmitting}
@@ -42,7 +43,8 @@ export const FormContent = React.memo(() => {
                         disabled={formik.isSubmitting}
                         helperText={meta.touched && meta.error}
                         error={meta.touched && meta.error}
-                        {...field}>
+                        {...field}
+                    >
                         {tags.map(tag => (
                             <MenuItem
                                 key={tag.id}
@@ -52,7 +54,8 @@ export const FormContent = React.memo(() => {
                                     "&:hover, &.focus, &.Mui-selected": {
                                         bgcolor: `${tag.color.hexcode} !important`,
                                     },
-                                }}>
+                                }}
+                            >
                                 {tag.name}
                             </MenuItem>
                         ))}
@@ -70,7 +73,8 @@ export const FormContent = React.memo(() => {
                         disabled={formik.isSubmitting}
                         helperText={meta.touched && meta.error}
                         error={meta.touched && meta.error}
-                        {...field}>
+                        {...field}
+                    >
                         {TimeUtil.timeList.map(
                             time =>
                                 time !== 0 && (

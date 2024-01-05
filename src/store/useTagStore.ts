@@ -1,7 +1,7 @@
-import axios from "axios";
 import {create} from "zustand";
 import {Color} from "../type/color.ts";
 import {TimeEventTag} from "../type/tag.tsx";
+import {apiClient} from "../util/apiClient.ts";
 
 interface TagStore {
     isFetching: boolean;
@@ -33,32 +33,32 @@ export const useTagStore = create<TagStore>((set, get) => ({
     setDeleteModal: (deleteModal: false | number) => set({deleteModal}),
     fetchTags: async () => {
         set({isFetching: true});
-        const response = await axios.get("/time_event_tags");
+        const response = await apiClient.get("/time_event_tags");
         set({tags: response.data, isFetching: false});
     },
     fetchColors: async () => {
         set({isFetching: true});
-        const response = await axios.get("/colors");
+        const response = await apiClient.get("/colors");
         set({colors: response.data, isFetching: false});
     },
     createTag: async tag => {
         set({isFetching: true});
-        await axios.post("/time_event_tags", tag);
+        await apiClient.post("/time_event_tags", tag);
         set({isFetching: false});
     },
     editTag: async tag => {
         set({isFetching: true});
-        await axios.put(`/time_event_tags/${tag.id}`, tag);
+        await apiClient.put(`/time_event_tags/${tag.id}`, tag);
         set({isFetching: false});
     },
     deleteTag: async tagId => {
         set({isFetching: true});
-        await axios.delete(`/time_event_tags/${tagId}`);
+        await apiClient.delete(`/time_event_tags/${tagId}`);
         set({isFetching: false});
     },
     reorderTags: async (ids: number[]) => {
         set({isFetching: true});
-        await axios.put("/time_event_tags/reorder", {ids});
+        await apiClient.put("/time_event_tags/reorder", {ids});
         set({isFetching: false});
         await get().fetchTags();
     },

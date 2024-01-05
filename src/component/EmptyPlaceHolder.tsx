@@ -11,9 +11,17 @@ interface Props {
 
 export const EmptyPlaceHolder = React.memo<Props>(({Icon, modelName}) => {
     return (
-        <Box mt="50%" width="100%" display="flex" justifyContent="center" alignItems="center" flexDirection="column" color={grey[500]}>
-            <Icon sx={{fontSize: 60, mb: 2}} />
-            <Typography>未有任何{modelName}</Typography>
+        <Box
+            mt="50%"
+            width="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            color={grey[500]}
+        >
+            <Icon sx={{fontSize: {xs: 60, sm: 80}, mb: 2}} />
+            <Typography sx={{fontSize: {xs: 14, sm: 20}}}>未有任何{modelName}</Typography>
         </Box>
     );
 });
