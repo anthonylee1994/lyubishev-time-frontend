@@ -2,10 +2,10 @@ import {ThemeProvider} from "@mui/material";
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Layout} from "./component/Layout";
-import {EventPage} from "./pages/event";
+import {EventPage} from "./pages/events";
 import {LoginPage} from "./pages/login";
 import {SummaryPage} from "./pages/summary";
-import {TagsPage} from "./pages/tag";
+import {TagsPage} from "./pages/tags";
 import {theme} from "./util/theme.ts";
 
 export const App = React.memo(() => {

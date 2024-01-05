@@ -4,8 +4,6 @@ import {AddButton} from "../../component/AddButton.tsx";
 import {EmptyPlaceHolder} from "../../component/EmptyPlaceHolder.tsx";
 import {Loading} from "../../component/Loading.tsx";
 import {Page} from "../../component/Page.tsx";
-import {DragProvider} from "../../component/dnd/DragProvider.tsx";
-import {DraggableList} from "../../component/dnd/DraggableList.tsx";
 import {useEventStore} from "../../store/useEventStore.ts";
 import {DateSelect} from "../../component/DateSelect.tsx";
 import {DeleteEventDialog} from "./DeleteEventDialog.tsx";
@@ -36,25 +34,11 @@ export const EventPage = React.memo(() => {
             {!isFetching && events.length === 0 ? (
                 <EmptyPlaceHolder Icon={RestoreIcon} modelName="活動記錄" />
             ) : (
-                <DragProvider>
-                    <DraggableList
-                        items={events}
-                        Card={EventCard}
-                        moveCard={(dragIndex, hoverIndex) => {
-                            const dragCard = events[dragIndex];
-                            const hoverCard = events[hoverIndex];
-
-                            useEventStore.setState(state => {
-                                const newEvents = [...state.events];
-                                newEvents[dragIndex] = hoverCard;
-                                newEvents[hoverIndex] = dragCard;
-                                state.reorderEvents(newEvents.map(event => event.id));
-
-                                return {events: newEvents};
-                            });
-                        }}
-                    />
-                </DragProvider>
+                <React.Fragment>
+                    {events.map(event => (
+                        <EventCard key={event.id} item={event} />
+                    ))}
+                </React.Fragment>
             )}
 
             <DeleteEventDialog />
