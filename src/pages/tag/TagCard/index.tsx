@@ -22,7 +22,7 @@ export const TagCard = React.memo<Props>(({tag}) => {
             justifyContent="space-between"
             alignItems="center"
             display="flex"
-            m={{xs: 1, sm: 2}}
+            m={2}
             borderRadius={4}
             bgcolor={tag.color.hexcode}
         >

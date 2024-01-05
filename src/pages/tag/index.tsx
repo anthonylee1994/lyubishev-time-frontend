@@ -6,6 +6,7 @@ import {useTagStore} from "../../store/useTagStore.ts";
 import {Loading} from "../../component/Loading.tsx";
 import {EditTagDialog} from "./EditTagDialog";
 import {AddButton} from "../../component/AddButton.tsx";
+import {EmptyPlaceHolder} from "../../component/EmptyPlaceHolder.tsx";
 
 export const TagsPage = React.memo(() => {
     const isFetching = useTagStore(state => state.isFetching);
@@ -22,9 +23,11 @@ export const TagsPage = React.memo(() => {
     return (
         <Page>
             <Loading show={isFetching} />
-            {tags.map(tag => (
-                <TagCard key={tag.id} tag={tag} />
-            ))}
+            {tags.length === 0 ? (
+                <EmptyPlaceHolder modelName="活動標籤" />
+            ) : (
+                tags.map(tag => <TagCard key={tag.id} tag={tag} />)
+            )}
             <DeleteTagDialog />
             <EditTagDialog />
 
