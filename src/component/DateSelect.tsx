@@ -1,4 +1,4 @@
-import {Box, IconButton} from "@mui/material";
+import {Box, Fab} from "@mui/material";
 import React from "react";
 import dayjs from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -15,7 +15,8 @@ interface Props {
 export const DateSelect = React.memo(({date, setDate}: Props) => {
     return (
         <Box display="flex" alignItems="center" p={2} pb={0}>
-            <IconButton
+            <Fab
+                color="secondary"
                 size="small"
                 onClick={() => {
                     setDate(dayjs(date).subtract(1, "day").format("YYYY-MM-DD"));
@@ -23,7 +24,7 @@ export const DateSelect = React.memo(({date, setDate}: Props) => {
                 sx={{mr: 1}}
             >
                 <ArrowBackIcon />
-            </IconButton>
+            </Fab>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     sx={{flex: 1}}
@@ -31,17 +32,29 @@ export const DateSelect = React.memo(({date, setDate}: Props) => {
                     onChange={date => {
                         date && setDate(date.format("YYYY-MM-DD"));
                     }}
+                    slotProps={{
+                        textField: {
+                            size: "small",
+                            fullWidth: true,
+                            inputProps: {
+                                sx: {
+                                    textAlign: "center",
+                                },
+                            },
+                        },
+                    }}
                 />
             </LocalizationProvider>
-            <IconButton
-                sx={{ml: 1}}
+            <Fab
+                color="secondary"
                 size="small"
                 onClick={() => {
                     setDate(dayjs(date).add(1, "day").format("YYYY-MM-DD"));
                 }}
+                sx={{ml: 1}}
             >
                 <ArrowForwardIcon />
-            </IconButton>
+            </Fab>
         </Box>
     );
 });
