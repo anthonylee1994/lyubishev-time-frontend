@@ -6,17 +6,18 @@ export const PieChart = React.memo(() => {
     const tags = useSummaryStore(state => state.tags);
     const summary = useSummaryStore(state => state.summary);
 
+    const summaryTags = Object.keys(summary).map(key => tags.find(tag => tag.id === Number(key)));
+    const summaryMinutes = Object.values(summary);
+
     return (
         <Pie
             data={{
-                labels: Object.keys(summary).map(
-                    key => tags.find(tag => tag.id === Number(key))?.name
-                ),
+                labels: summaryTags.map(tag => tag?.name),
                 datasets: [
                     {
                         label: "分鐘",
-                        data: Object.values(summary),
-                        backgroundColor: tags.map(tag => tag.color.hexcode),
+                        data: summaryMinutes,
+                        backgroundColor: summaryTags.map(tag => tag?.color.hexcode),
                     },
                 ],
             }}
