@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, MenuItem, TextField} from "@mui/material";
+import {Box, TextField} from "@mui/material";
 import {useSummaryStore} from "../../store/useSummaryStore.ts";
 
 export const Filter = React.memo(() => {
@@ -10,14 +10,16 @@ export const Filter = React.memo(() => {
         <Box display="flex" alignItems="center" p={2} pb={0}>
             <TextField
                 select
+                size="small"
                 fullWidth
                 label="篩選時間範圍"
                 onChange={e => setDay(Number(e.target.value))}
                 value={day}
+                SelectProps={{native: true}}
             >
-                <MenuItem value={1}>即日內</MenuItem>
-                <MenuItem value={7}>7日內</MenuItem>
-                <MenuItem value={30}>30日內</MenuItem>
+                <option value={1}>即日之內</option>
+                <option value={7}>7日之內</option>
+                <option value={30}>30日之內</option>
             </TextField>
         </Box>
     );

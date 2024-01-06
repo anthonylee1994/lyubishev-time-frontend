@@ -1,4 +1,4 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import {Dialog} from "@mui/material";
 import {Formik} from "formik";
 import React from "react";
 import * as Yup from "yup";
@@ -19,7 +19,6 @@ const EditSchema = Yup.object().shape({
 export const EditTagDialog = React.memo(() => {
     const editModal = useTagStore(state => state.editModal);
     const tagsLength = useTagStore(state => state.tags.length);
-    const actionName = editModal === "new" ? "新增" : editModal !== false ? "修改" : "";
     const colors = useTagStore(state => state.colors);
 
     const setEditModal = useTagStore(state => state.setEditModal);
@@ -67,22 +66,9 @@ export const EditTagDialog = React.memo(() => {
 
     return (
         <Dialog fullWidth maxWidth="xs" open={editModal !== false} onClose={onClose}>
-            <DialogTitle>{actionName}活動標籤</DialogTitle>
-            <DialogContent>
-                <Formik
-                    validationSchema={EditSchema}
-                    initialValues={initialValues}
-                    onSubmit={onSubmit}
-                >
-                    <FormContent />
-                </Formik>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose}>取消</Button>
-                <Button form="edit-tag-form" type="submit" variant="contained">
-                    {actionName}
-                </Button>
-            </DialogActions>
+            <Formik validationSchema={EditSchema} initialValues={initialValues} onSubmit={onSubmit}>
+                <FormContent />
+            </Formik>
         </Dialog>
     );
 });
