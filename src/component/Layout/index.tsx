@@ -13,6 +13,14 @@ export const Layout = React.memo(() => {
         if (!isLoggedIn() && location.pathname !== "/login") {
             navigate("/login");
         }
+    }, [isLoggedIn, location.pathname, navigate]);
+
+    React.useEffect(() => {
+        if (isLoggedIn()) {
+            document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#eceff1");
+        } else {
+            document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#f6f6f7");
+        }
     }, [isLoggedIn]);
 
     return (
