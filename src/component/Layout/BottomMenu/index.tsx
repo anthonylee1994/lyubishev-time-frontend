@@ -27,10 +27,23 @@ export const BottomMenu = React.memo(() => {
                 showLabels
                 value={page}
                 onChange={(_, newValue) => navigate(`/${newValue}`)}
+                sx={{height: {xs: undefined, md: 80}}}
             >
-                <BottomNavigationAction label="活動標籤" icon={<LocalOfferIcon />} value="tags" />
-                <BottomNavigationAction label="活動記錄" icon={<RestoreIcon />} value="" />
-                <BottomNavigationAction label="統計數據" icon={<PieChartIcon />} value="summary" />
+                <BottomNavigationAction
+                    label="活動標籤"
+                    icon={<LocalOfferIcon sx={{fontSize: {xs: undefined, md: 32}}} />}
+                    value="tags"
+                />
+                <BottomNavigationAction
+                    label="活動記錄"
+                    icon={<RestoreIcon sx={{fontSize: {xs: undefined, md: 32}}} />}
+                    value=""
+                />
+                <BottomNavigationAction
+                    label="統計數據"
+                    icon={<PieChartIcon sx={{fontSize: {xs: undefined, md: 32}}} />}
+                    value="summary"
+                />
             </BottomNavigation>
         </Paper>
     );
