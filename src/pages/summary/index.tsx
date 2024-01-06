@@ -25,13 +25,11 @@ export const SummaryPage = React.memo(() => {
     return (
         <Page>
             <Loading show={isFetching} />
+            <Filter />
             {!isFetching && Object.keys(summary).length === 0 ? (
                 <EmptyPlaceHolder Icon={PieChartIcon} modelName="統計數據" />
             ) : (
-                <React.Fragment>
-                    <Filter />
-                    <PieChart />
-                </React.Fragment>
+                <PieChart />
             )}
         </Page>
     );
