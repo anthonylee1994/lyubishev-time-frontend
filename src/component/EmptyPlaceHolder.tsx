@@ -12,7 +12,7 @@ interface Props {
 export const EmptyPlaceHolder = React.memo<Props>(({Icon, modelName}) => {
     return (
         <Box
-            mt="50%"
+            mt="min(50%, calc(50vh - 120px))"
             width="100%"
             display="flex"
             justifyContent="center"

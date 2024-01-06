@@ -54,10 +54,10 @@ export const EventsDialog = React.memo(() => {
             </AppBar>
             <DialogContent sx={{bgcolor: grey[50], p: 0}}>
                 <Loading show={isFetching} />
-                {!isFetching && events.length === 0 ? (
+                {true || (!isFetching && events.length === 0) ? (
                     <EmptyPlaceHolder Icon={EventIcon} modelName="活動" />
                 ) : (
-                    <React.Fragment>
+                    <Box sx={{width: 600}} mx="auto">
                         {events.map(event => (
                             <Box
                                 borderRadius={3}
@@ -95,7 +95,7 @@ export const EventsDialog = React.memo(() => {
                                 <Box p={1}>{event.name}</Box>
                             </Box>
                         ))}
-                    </React.Fragment>
+                    </Box>
                 )}
             </DialogContent>
         </Dialog>
