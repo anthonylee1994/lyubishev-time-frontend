@@ -22,7 +22,7 @@ const EditSchema = Yup.object().shape({
 
 export const EditEventDialog = React.memo(() => {
     const editModal = useEventStore(state => state.editModal);
-    const eventsLength = useEventStore(state => state.tags.length);
+    const eventsLength = useEventStore(state => state.events.length);
     const tags = useEventStore(state => state.tags);
 
     const setEditModal = useEventStore(state => state.setEditModal);
