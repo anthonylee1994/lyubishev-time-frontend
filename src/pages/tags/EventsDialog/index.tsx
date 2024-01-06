@@ -20,8 +20,6 @@ export const EventsDialog = React.memo(() => {
     const fetchEvents = useTagStore(state => state.fetchEvents);
     const setSelectTagId = useTagStore(state => state.setSelectTagId);
 
-    console.log("events", events);
-
     const onClose = () => {
         setSelectTagId(null);
     };
@@ -54,10 +52,10 @@ export const EventsDialog = React.memo(() => {
             </AppBar>
             <DialogContent sx={{bgcolor: grey[50], p: 0}}>
                 <Loading show={isFetching} />
-                {true || (!isFetching && events.length === 0) ? (
+                {!isFetching && events.length === 0 ? (
                     <EmptyPlaceHolder Icon={EventIcon} modelName="活動" />
                 ) : (
-                    <Box sx={{width: 600}} mx="auto">
+                    <Box sx={{maxWidth: 600}} mx="auto">
                         {events.map(event => (
                             <Box
                                 borderRadius={3}
