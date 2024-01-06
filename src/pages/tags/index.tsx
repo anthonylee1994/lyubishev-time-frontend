@@ -8,6 +8,7 @@ import {useTagStore} from "../../store/useTagStore.ts";
 import {DeleteTagDialog} from "./DeleteTagDialog.tsx";
 import {EditTagDialog} from "./EditTagDialog";
 import {TagCard} from "./TagCard.tsx";
+import {EventsDialog} from "./EventsDialog";
 
 export const TagsPage = React.memo(() => {
     const isFetching = useTagStore(state => state.isFetching);
@@ -35,6 +36,7 @@ export const TagsPage = React.memo(() => {
             )}
             <DeleteTagDialog />
             <EditTagDialog />
+            <EventsDialog />
 
             <AddButton onClick={() => setEditModal("new")} />
         </Page>

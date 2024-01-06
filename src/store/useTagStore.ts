@@ -2,13 +2,21 @@ import {create} from "zustand";
 import {Color} from "../type/color.ts";
 import {TimeEventTag} from "../type/tag.tsx";
 import {apiClient} from "../util/apiClient.ts";
+import {TimeEvent} from "../type/event.ts";
 
 interface TagStore {
     isFetching: boolean;
+
+    selectedTagId: number | null;
+    setSelectTagId: (selectedTagId: number | null) => void;
+
     tags: TimeEventTag[];
+    events: TimeEvent[];
     colors: Color[];
+
     fetchTags: () => Promise<void>;
     fetchColors: () => Promise<void>;
+    fetchEvents: () => Promise<void>;
 
     createTag: (tag: Partial<TimeEventTag>) => Promise<void>;
     editTag: (tag: Partial<TimeEventTag>) => Promise<void>;
@@ -25,8 +33,14 @@ interface TagStore {
 
 export const useTagStore = create<TagStore>((set, get) => ({
     isFetching: false,
+
+    selectedTagId: null,
+    setSelectTagId: selectedTagId => set({selectedTagId}),
+
     tags: [],
+    events: [],
     colors: [],
+
     editModal: false,
     deleteModal: false,
     setEditModal: (editModal: false | "new" | TimeEventTag) => set({editModal}),
@@ -40,6 +54,11 @@ export const useTagStore = create<TagStore>((set, get) => ({
         set({isFetching: true});
         const response = await apiClient.get("/colors");
         set({colors: response.data, isFetching: false});
+    },
+    fetchEvents: async () => {
+        set({isFetching: true});
+        const response = await apiClient.get(`/time_event_tags/${get().selectedTagId}/time_events`);
+        set({events: response.data, isFetching: false});
     },
     createTag: async tag => {
         set({isFetching: true});

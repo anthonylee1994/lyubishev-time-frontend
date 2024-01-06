@@ -17,13 +17,31 @@ export const TagCard = React.memo<Props>(({item}) => {
 
     const setEditModal = useTagStore(state => state.setEditModal);
     const setDeleteModal = useTagStore(state => state.setDeleteModal);
+    const setSelectTagId = useTagStore(state => state.setSelectTagId);
 
     return (
-        <Box boxShadow={2} flexDirection="column" justifyContent="space-between" alignItems="center" display="flex" m={2} borderRadius={4} bgcolor={item.color.hexcode}>
+        <Box
+            onClick={() => setSelectTagId(item.id)}
+            sx={{cursor: "pointer", "&:active": {boxShadow: 8}}}
+            boxShadow={2}
+            flexDirection="column"
+            justifyContent="space-between"
+            alignItems="center"
+            display="flex"
+            m={2}
+            borderRadius={4}
+            bgcolor={item.color.hexcode}
+        >
             <Typography color={grey[800]} p={1} sx={{userSelect: "none"}}>
                 {item.name}
             </Typography>
-            <Box display="flex" justifyContent="space-between" bgcolor="rgb(255 255 255 / 50%)" width="100%" sx={{borderBottomLeftRadius: 12, borderBottomRightRadius: 12}}>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                bgcolor="rgb(255 255 255 / 50%)"
+                width="100%"
+                sx={{borderBottomLeftRadius: 12, borderBottomRightRadius: 12}}
+            >
                 <Box>
                     <UpButton id={item.id} items={tags} reorder={reorderTags} />
                     <DownButton id={item.id} items={tags} reorder={reorderTags} />
