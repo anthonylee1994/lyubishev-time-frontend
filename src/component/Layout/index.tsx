@@ -8,6 +8,7 @@ export const Layout = React.memo(() => {
     const location = useLocation();
     const navigate = useNavigate();
     const isLoggedIn = useAuthStore(state => state.isLoggedIn);
+    const token = useAuthStore(state => state.token);
 
     React.useEffect(() => {
         if (!isLoggedIn() && location.pathname !== "/login") {
@@ -16,12 +17,12 @@ export const Layout = React.memo(() => {
     }, [isLoggedIn, location.pathname, navigate]);
 
     React.useEffect(() => {
-        if (isLoggedIn()) {
+        if (token) {
             document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#eceff1");
         } else {
             document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#f6f6f7");
         }
-    }, [isLoggedIn]);
+    }, [token]);
 
     return (
         <React.Fragment>
