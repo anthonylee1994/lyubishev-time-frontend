@@ -30,6 +30,16 @@ export const EventsDialog = React.memo(() => {
         }
     }, [fetchEvents, selectedTagId]);
 
+    React.useEffect(() => {
+        if (currentTag) {
+            document
+                .querySelector(`meta[name="theme-color"]`)
+                ?.setAttribute("content", currentTag.color.hexcode);
+        } else {
+            document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#eceff1");
+        }
+    }, [currentTag]);
+
     return (
         <Dialog
             fullScreen
