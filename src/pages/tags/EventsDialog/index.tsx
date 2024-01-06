@@ -70,7 +70,7 @@ export const EventsDialog = React.memo(() => {
                                     justifyContent="space-between"
                                     bgcolor="grey.200"
                                     fontSize={14}
-                                    p={1}
+                                    p={1.5}
                                 >
                                     <Typography
                                         sx={{
@@ -90,7 +90,7 @@ export const EventsDialog = React.memo(() => {
                                         {TimeUtil.timeString(event.minute)}
                                     </Typography>
                                 </Box>
-                                <Box p={1}>{event.name}</Box>
+                                <Box p={2}>{event.name}</Box>
                             </Box>
                         ))}
                     </Box>
