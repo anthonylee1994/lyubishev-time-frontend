@@ -15,14 +15,16 @@ export const UpButton = React.memo<Props>(({id, items, reorder}) => {
         <IconButton
             aria-label="up"
             disabled={currentItemIndex === 0}
-            onClick={async () => {
+            onClick={async e => {
+                e.stopPropagation();
                 if (currentItemIndex === 0) return;
                 const newItems = [...items];
                 const temp = newItems[currentItemIndex];
                 newItems[currentItemIndex] = newItems[currentItemIndex - 1];
                 newItems[currentItemIndex - 1] = temp;
                 await reorder(newItems.map(_ => _.id));
-            }}>
+            }}
+        >
             <ArrowUpwardIcon />
         </IconButton>
     );

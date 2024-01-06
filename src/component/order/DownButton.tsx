@@ -15,14 +15,16 @@ export const DownButton = React.memo<Props>(({id, items, reorder}) => {
         <IconButton
             aria-label="down"
             disabled={currentItemIndex === items.length - 1}
-            onClick={async () => {
+            onClick={async e => {
+                e.stopPropagation();
                 if (currentItemIndex === items.length - 1) return;
                 const newItems = [...items];
                 const temp = newItems[currentItemIndex];
                 newItems[currentItemIndex] = newItems[currentItemIndex + 1];
                 newItems[currentItemIndex + 1] = temp;
                 await reorder(newItems.map(_ => _.id));
-            }}>
+            }}
+        >
             <ArrowDownwardIcon />
         </IconButton>
     );
