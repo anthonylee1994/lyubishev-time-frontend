@@ -13,7 +13,7 @@ export const BottomMenu = React.memo(() => {
     return (
         <Paper
             sx={{
-                position: "absolute",
+                position: "fixed",
                 width: "100%",
                 bottom: 0,
                 left: 0,

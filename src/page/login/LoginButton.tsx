@@ -33,10 +33,8 @@ export const LoginButton = React.memo(() => {
     }, [onLogin]);
 
     React.useEffect(() => {
-        if (verified) {
+        if (verified === null) {
             setShowLoading(false);
-        } else {
-            setShowLoading(true);
         }
     }, [verified, setShowLoading]);
 
