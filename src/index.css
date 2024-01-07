@@ -15,4 +15,5 @@ body {
 html,
 body {
     overscroll-behavior-x: none;
+    overflow-y: hidden;
 }
