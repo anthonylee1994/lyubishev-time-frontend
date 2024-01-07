@@ -11,9 +11,3 @@
 body {
     margin: 0;
 }
-
-html,
-body {
-    overscroll-behavior-x: none;
-    overflow-y: hidden;
-}

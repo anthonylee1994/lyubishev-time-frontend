@@ -9,19 +9,14 @@ export const Page = React.memo<Props>(({children}) => {
     return (
         <Box
             sx={{
-                overflowY: "auto",
-                height: {
-                    xs: "calc(100vh - 110px - env(safe-area-inset-bottom))",
-                    sm: "calc(100vh - 142px - env(safe-area-inset-bottom))",
-                },
-                width: "100%",
-                mx: "auto",
                 mt: {xs: 7, sm: 8},
             }}
+            px={{xs: 0, sm: 2}}
+            pb={{xs: 24, sm: 24}}
+            maxWidth={600}
+            mx="auto"
         >
-            <Box px={{xs: 0, sm: 2}} pb={{xs: 20, sm: 24}} maxWidth={600} mx="auto">
-                {children}
-            </Box>
+            {children}
         </Box>
     );
 });
