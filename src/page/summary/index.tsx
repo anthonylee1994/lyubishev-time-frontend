@@ -7,6 +7,7 @@ import {ArcElement, Chart as ChartJS, Legend, Tooltip} from "chart.js";
 import {PieChart} from "./PieChart.tsx";
 import {Filter} from "./Filter.tsx";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import {Box} from "@mui/material";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -25,13 +26,24 @@ export const SummaryPage = React.memo(() => {
 
     return (
         <Page>
-            <Loading show={isFetching} />
-            <Filter />
-            {!isFetching && Object.keys(summary).length === 0 ? (
-                <EmptyPlaceHolder Icon={PieChartIcon} modelName="統計數據" />
-            ) : (
-                <PieChart />
-            )}
+            <Box
+                width="100%"
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "stretch",
+                }}
+            >
+                <Loading show={isFetching} />
+                <Filter />
+                {!isFetching && Object.keys(summary).length === 0 ? (
+                    <EmptyPlaceHolder Icon={PieChartIcon} modelName="統計數據" />
+                ) : (
+                    <Box mx="auto" width="80%" flex={1}>
+                        <PieChart />
+                    </Box>
+                )}
+            </Box>
         </Page>
     );
 });
