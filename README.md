@@ -8,3 +8,6 @@ Vite + TypeScript + React
 
 ### Back-end
 Ruby on Rails API
+
+### Deployment
+Dokku (Heroku liked service)
