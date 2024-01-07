@@ -10,7 +10,10 @@ export const Page = React.memo<Props>(({children}) => {
         <Box
             sx={{
                 overflowY: "auto",
-                height: {xs: "calc(100vh - 110px)", sm: "calc(100vh - 142px)"},
+                height: {
+                    xs: "calc(100vh - 110px - env(safe-area-inset-bottom))",
+                    sm: "calc(100vh - 142px - env(safe-area-inset-bottom))",
+                },
                 width: "100%",
                 mx: "auto",
                 mt: {xs: 7, sm: 8},
