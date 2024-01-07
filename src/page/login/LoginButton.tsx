@@ -1,6 +1,5 @@
 import {Box, CircularProgress} from "@mui/material";
 import React from "react";
-import {useNavigate} from "react-router-dom";
 import TelegramLoginButton, {TelegramUser} from "telegram-login-button";
 import {useAuthStore} from "../../store/useAuthStore.ts";
 
@@ -15,18 +14,15 @@ const mockUser = {
 
 export const LoginButton = React.memo(() => {
     const [showLoading, setShowLoading] = React.useState(false);
-    const isLoggedIn = useAuthStore(state => state.isLoggedIn);
+    const verified = useAuthStore(state => state.verified);
     const login = useAuthStore(state => state.login);
 
-    const navigate = useNavigate();
-
-    const onLogin = async (user: TelegramUser) => {
-        await login(user);
-        if (isLoggedIn()) {
-            setShowLoading(false);
-            navigate("/");
-        }
-    };
+    const onLogin = React.useCallback(
+        async (user: TelegramUser) => {
+            await login(user);
+        },
+        [login]
+    );
 
     React.useEffect(() => {
         if (import.meta.env.DEV) {
@@ -36,9 +32,21 @@ export const LoginButton = React.memo(() => {
         }
     }, [onLogin]);
 
+    React.useEffect(() => {
+        if (verified) {
+            setShowLoading(false);
+        } else {
+            setShowLoading(true);
+        }
+    }, [verified, setShowLoading]);
+
     return (
         <Box position="fixed" bottom={{xs: "10%", md: "15%"}}>
-            {showLoading ? <CircularProgress size={50} thickness={6} /> : <TelegramLoginButton botName="LyubishevBot" dataOnauth={onLogin} />}
+            {showLoading ? (
+                <CircularProgress size={50} thickness={6} />
+            ) : (
+                <TelegramLoginButton botName="LyubishevBot" dataOnauth={onLogin} />
+            )}
         </Box>
     );
 });

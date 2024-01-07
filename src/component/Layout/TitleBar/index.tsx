@@ -5,7 +5,7 @@ import {LogoutButton} from "./LogoutButton.tsx";
 
 export const TitleBar = React.memo(() => {
     return (
-        <AppBar position="fixed" sx={{bgcolor: blueGrey[50]}}>
+        <AppBar position="absolute" sx={{bgcolor: blueGrey[50], top: 0, left: 0, right: 0}}>
             <Toolbar sx={{bgcolor: blueGrey[50]}}>
                 <Box
                     maxWidth={580}

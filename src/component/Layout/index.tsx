@@ -1,38 +1,24 @@
 import React from "react";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {useAuthStore} from "../../store/useAuthStore.ts";
+import {Outlet} from "react-router-dom";
 import {BottomMenu} from "./BottomMenu";
 import {TitleBar} from "./TitleBar";
+import {useAuth} from "../../hook/useAuth.ts";
+import {Box} from "@mui/material";
 
 export const Layout = React.memo(() => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const isLoggedIn = useAuthStore(state => state.isLoggedIn);
-    const token = useAuthStore(state => state.token);
-
-    React.useEffect(() => {
-        if (!isLoggedIn() && location.pathname !== "/login") {
-            navigate("/login");
-        }
-    }, [isLoggedIn, location.pathname, navigate]);
-
-    React.useEffect(() => {
-        if (token) {
-            document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#eceff1");
-        } else {
-            document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#f6f6f7");
-        }
-    }, [token]);
+    const {pathname} = useAuth();
 
     return (
-        <React.Fragment>
-            {location.pathname === "/login" ? null : (
-                <React.Fragment>
+        <Box flexDirection="column">
+            {pathname === "/login" ? (
+                <Outlet />
+            ) : (
+                <Box flexDirection="column">
                     <TitleBar />
+                    <Outlet />
                     <BottomMenu />
-                </React.Fragment>
+                </Box>
             )}
-            <Outlet />
-        </React.Fragment>
+        </Box>
     );
 });

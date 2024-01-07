@@ -12,6 +12,9 @@ export default defineConfig({
         CommonJS(),
         VitePWA({
             registerType: "autoUpdate",
+            workbox: {
+                cleanupOutdatedCaches: true,
+            },
         }),
         TSConfigPaths(),
         Legacy({targets: ["cover 95%"]}),

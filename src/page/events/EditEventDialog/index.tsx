@@ -71,6 +71,7 @@ export const EditEventDialog = React.memo(() => {
                 minute: values.duration_unit === "hour" ? values.duration * 60 : values.duration,
             });
         }
+
         formikHelpers.setSubmitting(false);
         setEditModal(false);
         await fetchEvents();

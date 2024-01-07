@@ -76,7 +76,7 @@ export const FormContent = React.memo(() => {
                         )}
                     </Field>
                     <Field name="duration_unit">
-                        {({field, meta}) => (
+                        {({field, meta, form}) => (
                             <TextField
                                 sx={{mt: 2, width: 100}}
                                 select
@@ -88,6 +88,21 @@ export const FormContent = React.memo(() => {
                                 error={meta.touched && meta.error}
                                 defaultValue="minute"
                                 {...field}
+                                onChange={e => {
+                                    e.preventDefault();
+                                    const value = Number(form.values.duration);
+
+                                    form.setFieldValue("duration_unit", e.target.value);
+
+                                    Math.round(value);
+
+                                    form.setFieldValue(
+                                        "duration",
+                                        form.values.duration_unit === "minute"
+                                            ? Math.round((value / 60) * 100) / 100
+                                            : value * 60
+                                    );
+                                }}
                             >
                                 <option value="minute">分鐘</option>
                                 <option value="hour">小時</option>

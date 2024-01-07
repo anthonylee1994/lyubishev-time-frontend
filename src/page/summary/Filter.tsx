@@ -20,6 +20,7 @@ export const Filter = React.memo(() => {
                 <option value={1}>即日之內</option>
                 <option value={7}>7日之內</option>
                 <option value={30}>30日之內</option>
+                <option value={365}>365日之內</option>
             </TextField>
         </Box>
     );

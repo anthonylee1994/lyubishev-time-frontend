@@ -8,6 +8,7 @@ import EventIcon from "@mui/icons-material/Event";
 import {grey} from "@mui/material/colors";
 import {Loading} from "../../../component/Loading.tsx";
 import {TimeUtil} from "../../../util/TimeUtil.ts";
+import {ThemeColorUtil} from "../../../util/ThemeColorUtil.ts";
 
 export const EventsDialog = React.memo(() => {
     const selectedTagId = useTagStore(state => state.selectedTagId);
@@ -32,11 +33,9 @@ export const EventsDialog = React.memo(() => {
 
     React.useEffect(() => {
         if (currentTag) {
-            document
-                .querySelector(`meta[name="theme-color"]`)
-                ?.setAttribute("content", currentTag.color.hexcode);
+            ThemeColorUtil.setThemeColor(currentTag.color.hexcode);
         } else {
-            document.querySelector(`meta[name="theme-color"]`)?.setAttribute("content", "#eceff1");
+            ThemeColorUtil.setThemeColor("#eceff1");
         }
     }, [currentTag]);
 

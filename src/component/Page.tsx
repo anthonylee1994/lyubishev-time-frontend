@@ -7,8 +7,16 @@ interface Props {
 
 export const Page = React.memo<Props>(({children}) => {
     return (
-        <Box position="relative" mt={{xs: 7, sm: 8}} pb="max(22vh, 180px)" maxWidth={600} mx="auto">
-            {children}
+        <Box
+            sx={{
+                overflowY: "auto",
+                height: "calc(100vh - 110px)",
+                maxWidth: 600,
+                mx: "auto",
+                mt: {xs: 7, sm: 8},
+            }}
+        >
+            <Box pb={{xs: 20, sm: 24}}>{children}</Box>
         </Box>
     );
 });

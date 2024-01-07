@@ -13,14 +13,15 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export const SummaryPage = React.memo(() => {
     const isFetching = useSummaryStore(state => state.isFetching);
 
+    const fetchColors = useSummaryStore(state => state.fetchColors);
     const fetchTags = useSummaryStore(state => state.fetchTags);
     const fetchSummary = useSummaryStore(state => state.fetchSummary);
 
     const summary = useSummaryStore(state => state.summary);
 
     React.useEffect(() => {
-        Promise.all([fetchSummary(), fetchTags()]);
-    }, [fetchSummary, fetchTags]);
+        Promise.all([fetchColors(), fetchTags(), fetchSummary()]);
+    }, [fetchColors, fetchSummary, fetchTags]);
 
     return (
         <Page>
