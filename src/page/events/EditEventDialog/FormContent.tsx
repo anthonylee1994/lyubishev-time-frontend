@@ -90,18 +90,18 @@ export const FormContent = React.memo(() => {
                                 {...field}
                                 onChange={e => {
                                     e.preventDefault();
-                                    const value = Number(form.values.duration);
-
                                     form.setFieldValue("duration_unit", e.target.value);
+                                    const duration = Number(form.values.duration);
 
-                                    Math.round(value);
-
-                                    form.setFieldValue(
-                                        "duration",
-                                        form.values.duration_unit === "minute"
-                                            ? Math.round((value / 60) * 100) / 100
-                                            : value * 60
-                                    );
+                                    if (e.target.value === "minute") {
+                                        form.setFieldValue("duration", duration * 60);
+                                    } else {
+                                        const canBeHour = duration >= 60 && duration % 60 === 0;
+                                        form.setFieldValue(
+                                            "duration",
+                                            canBeHour ? duration / 60 : duration
+                                        );
+                                    }
                                 }}
                             >
                                 <option value="minute">分鐘</option>

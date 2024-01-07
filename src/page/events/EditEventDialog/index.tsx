@@ -30,25 +30,27 @@ export const EditEventDialog = React.memo(() => {
     const editEvent = useEventStore(state => state.editEvent);
     const fetchEvents = useEventStore(state => state.fetchEvents);
 
-    const initialValues = React.useMemo<FormValues>(
-        () =>
-            editModal === "new" || !editModal
-                ? {
-                      name: "",
-                      tag_id: tags[0]?.id,
-                      duration: 5,
-                      duration_unit: "minute",
-                      order: eventsLength,
-                  }
-                : {
-                      name: editModal.name,
-                      tag_id: editModal.tag_id,
-                      duration: editModal.minute,
-                      duration_unit: "minute",
-                      order: editModal.order,
-                  },
-        [editModal, eventsLength, tags]
-    );
+    const initialValues = React.useMemo<FormValues>(() => {
+        if (editModal === "new" || !editModal) {
+            return {
+                name: "",
+                tag_id: tags[0]?.id,
+                duration: 5,
+                duration_unit: "minute",
+                order: eventsLength,
+            };
+        }
+
+        const isHour = editModal.minute >= 60 && editModal.minute % 60 === 0;
+
+        return {
+            name: editModal.name,
+            tag_id: editModal.tag_id,
+            duration: isHour ? editModal.minute / 60 : editModal.minute,
+            duration_unit: isHour ? "hour" : "minute",
+            order: editModal.order,
+        };
+    }, [editModal, eventsLength, tags]);
 
     const onClose = () => {
         setEditModal(false);
