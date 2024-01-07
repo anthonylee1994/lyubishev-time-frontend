@@ -7,7 +7,7 @@ Demo: https://time.kaului.com/
 Vite + TypeScript + React
 
 ### Back-end
-Ruby on Rails API
+Ruby on Rails API + PostgresSQL + Active Record ORM
 
 ### Deployment
 Dokku (Heroku liked service)
