@@ -14,14 +14,15 @@ const mockUser = {
 
 export const LoginButton = React.memo(() => {
     const [showLoading, setShowLoading] = React.useState(false);
-    const verified = useAuthStore(state => state.verified);
     const login = useAuthStore(state => state.login);
 
     const onLogin = React.useCallback(
         async (user: TelegramUser) => {
+            setShowLoading(true);
             await login(user);
+            setShowLoading(false);
         },
-        [login]
+        [login, setShowLoading]
     );
 
     React.useEffect(() => {
@@ -31,12 +32,6 @@ export const LoginButton = React.memo(() => {
             }, 3000);
         }
     }, [onLogin]);
-
-    React.useEffect(() => {
-        if (verified === null) {
-            setShowLoading(false);
-        }
-    }, [verified, setShowLoading]);
 
     return (
         <Box position="fixed" bottom={{xs: "10%", md: "15%"}}>
