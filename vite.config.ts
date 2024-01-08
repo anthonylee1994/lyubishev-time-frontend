@@ -1,6 +1,6 @@
 import {defineConfig} from "vite";
 import {VitePWA} from "vite-plugin-pwa";
-import React from "@vitejs/plugin-react";
+import React from "@vitejs/plugin-react-swc";
 import CommonJS from "vite-plugin-commonjs";
 import Legacy from "@vitejs/plugin-legacy";
 import TSConfigPaths from "vite-tsconfig-paths";
